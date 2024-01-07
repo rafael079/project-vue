@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import path from "path";
 import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
+import Components from "unplugin-vue-components/vite";
+import VueIconsResolver from "@kalimahapps/vue-icons/resolver";
 
 export default defineConfig({
     plugins: [
@@ -16,6 +18,9 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
             },
+        }),
+        Components({
+            resolvers: [VueIconsResolver],
         }),
     ],
     resolve: {

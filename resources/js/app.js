@@ -5,6 +5,8 @@ import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 
+import Layout from "@/Layouts/AppWeb.vue";
+
 const appTitle =
     window.document.getElementsByTagName("title")[0]?.innerText || "RoxCorp";
 
@@ -15,6 +17,11 @@ createInertiaApp({
             `./Pages/${name}.vue`,
             import.meta.glob("./Pages/**/*.vue", { eager: true })
         );
+
+        pageComponent.then((module) => {
+            module.default.layout = module.default.layout || Layout;
+        });
+
         return pageComponent;
     },
     setup({ el, App, props, plugin }) {
