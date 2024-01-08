@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\User\RegisterController;
 use Illuminate\Support\Facades\Route;
+use Momentum\Preflight\PreflightMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['guest'])->group(function () {
+    Route::post('register', [RegisterController::class, 'store'])->middleware(PreflightMiddleware::class)->name('register');
+});

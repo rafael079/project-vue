@@ -4,6 +4,7 @@ import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
+import { i18nVue, trans } from "laravel-vue-i18n";
 
 import Layout from "@/Layouts/AppWeb.vue";
 
@@ -27,7 +28,15 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue, Ziggy);
+            .use(ZiggyVue, Ziggy)
+            .use(i18nVue, {
+                resolve: async (lang) => {
+                    const langs = import.meta.glob("../../lang/*.json");
+                    return await langs[`../../lang/${lang}.json`]();
+                },
+            });
+
+        app.config.globalProperties.__ = trans;
 
         app.mount(el);
     },

@@ -20,6 +20,17 @@
                             search
                         </div>
                         <!-- search -->
+
+                        <!-- users -->
+                        <div
+                            class="ml-auto hidden items-center gap-x-1 lg:flex"
+                        >
+                            <template v-if="$page.props.auth.user"> </template>
+                            <template v-else>
+                                <SignupNavigation />
+                            </template>
+                        </div>
+                        <!-- users -->
                     </div>
                 </div>
             </nav>
@@ -33,4 +44,5 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
 import AppLogo from "@Components/Shared/AppLogo.vue";
+import SignupNavigation from '@Components/User/SignupNavigation.vue';
 </script>
