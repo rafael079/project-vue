@@ -27,6 +27,7 @@
                         >
                             <template v-if="$page.props.auth.user"> </template>
                             <template v-else>
+                                <LoginNavigation />
                                 <SignupNavigation />
                             </template>
                         </div>
@@ -44,5 +45,6 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
 import AppLogo from "@Components/Shared/AppLogo.vue";
-import SignupNavigation from '@Components/User/SignupNavigation.vue';
+import SignupNavigation from "@Components/User/SignupNavigation.vue";
+import LoginNavigation from "@/Components/User/LoginNavigation.vue";
 </script>

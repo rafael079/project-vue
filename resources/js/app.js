@@ -5,6 +5,7 @@ import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import { i18nVue, trans } from "laravel-vue-i18n";
+import mitt from "mitt";
 
 import Layout from "@/Layouts/AppWeb.vue";
 
@@ -37,6 +38,8 @@ createInertiaApp({
             });
 
         app.config.globalProperties.__ = trans;
+
+        app.provide("emitter", mitt());
 
         app.mount(el);
     },

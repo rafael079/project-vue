@@ -52,15 +52,31 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { inject, onMounted, ref } from "vue";
 import AppButton from "@Components/Form/AppButton.vue";
 import PrimaryButton from "@Components/Form/PrimaryButton.vue";
 import AppModal from "@Components/Shared/AppModal.vue";
 import SignupForm from "@Components/User/SignupForm.vue";
 
+const getEmitter = inject("emitter");
+
 const openSignupModal = ref(false);
 
 const closeSignupModal = () => (openSignupModal.value = false);
 
-const openLoginModal = () => {};
+const openLoginModal = () => {
+    if (getEmitter) {
+        getEmitter.emit("openLoginForm");
+        closeSignupModal();
+    }
+};
+
+onMounted(() => {
+    if (getEmitter) {
+        getEmitter.on(
+            "openRegisterForm",
+            (e) => (openSignupModal.value = true)
+        );
+    }
+});
 </script>
