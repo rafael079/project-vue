@@ -25,7 +25,9 @@
                         <div
                             class="ml-auto hidden items-center gap-x-1 lg:flex"
                         >
-                            <template v-if="$page.props.auth.user"> </template>
+                            <template v-if="$page.props.auth.user">
+                                <NavigationDropdownUsers />
+                            </template>
                             <template v-else>
                                 <LoginNavigation />
                                 <SignupNavigation />
@@ -37,9 +39,12 @@
             </nav>
         </header>
         <main>
-            <slot />
+            <transition name="fade" mode="out-in">
+                <slot />
+            </transition>
         </main>
         <footer></footer>
+        <AppFlashMessagesContainer />
     </div>
 </template>
 <script setup>
@@ -47,4 +52,16 @@ import { Link } from "@inertiajs/vue3";
 import AppLogo from "@Components/Shared/AppLogo.vue";
 import SignupNavigation from "@Components/User/SignupNavigation.vue";
 import LoginNavigation from "@/Components/User/LoginNavigation.vue";
+import NavigationDropdownUsers from "@/Components/User/NavigationDropdownUsers.vue";
+import AppFlashMessagesContainer from "@/Components/Shared/AppFlashMessagesContainer.vue";
 </script>
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+    @apply transition-opacity duration-300 ease-out;
+}
+.fade-enter-from,
+.fade-leave-to {
+    @apply opacity-0;
+}
+</style>

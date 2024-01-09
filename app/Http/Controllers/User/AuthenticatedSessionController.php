@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\AuthenticatedSessionStoreRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -14,6 +15,17 @@ class AuthenticatedSessionController extends Controller
         $authenticatedSessionStoreRequest->authenticate();
 
         $authenticatedSessionStoreRequest->session()->regenerate();
+
+        return redirect()->route('home');
+    }
+
+    public function destroy(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         return redirect()->route('home');
     }
