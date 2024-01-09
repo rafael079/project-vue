@@ -17,6 +17,28 @@ class ImagesUploadService
         $this->storage = Storage::disk(config('uploads.disk'));
     }
 
+    public function avatarUpload(UploadedFile $uploadedFile, string $oldUserAvatar = null)
+    {
+        $extension = $uploadedFile->getClientOriginalExtension();
+
+        $image = $this->renameUploadedFile($extension);
+
+        $avatar = Image::make($uploadedFile)
+            ->orientate()
+            ->fit(200, 200, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->encode($extension);
+
+        $upload = $this->makeUploadFile('users/avatar', $image, $avatar, $oldUserAvatar);
+
+        if (!$upload) {
+            return false;
+        }
+
+        return $image;
+    }
+
     public function coverUpload(UploadedFile $uploadedFile, string $oldUserCover = null): string|bool
     {
         $extension = $uploadedFile->getClientOriginalExtension();
@@ -30,19 +52,31 @@ class ImagesUploadService
                 $constraint->upsize();
             })->encode($extension);
 
-        $upload = $this->storage->put("users/cover/{$image}", $cover);
+        $upload = $this->makeUploadFile('users/cover', $image, $cover, $oldUserCover);
 
         if (!$upload) {
             return false;
         }
 
-        if ($oldUserCover) {
-            if ($this->storage->exists("users/cover/{$oldUserCover}")) {
-                $this->storage->delete("users/cover/{$oldUserCover}");
+        return $image;
+    }
+
+    private function makeUploadFile(string $path, string $file, \Intervention\Image\Image $image, string $oldFile = null): bool
+    {
+        $upload = $this->storage->put($path . "/" . $file, $image);
+
+        if ($upload) {
+
+            if ($oldFile) {
+                if ($this->storage->exists($path . "/" . $oldFile)) {
+                    $this->storage->delete($path . "/" . $oldFile);
+                }
             }
+
+            return true;
         }
 
-        return $image;
+        return false;
     }
 
     private function renameUploadedFile(string $extension): string

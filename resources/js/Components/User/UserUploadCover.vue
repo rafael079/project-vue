@@ -31,6 +31,7 @@ import { ref } from "vue";
 import { useForm, usePage } from "@inertiajs/vue3";
 import AppButton from "@Components/Form/AppButton.vue";
 import LoaderCard from "@Components/Shared/LoaderCard.vue";
+import { trans } from "laravel-vue-i18n";
 
 const coverRef = ref(null);
 
@@ -41,7 +42,12 @@ const uploadCover = () => {
         onBefore: () => form.clearErrors(),
         onFinish: () => (coverRef.value.value = null),
         onError: (error) => {
-            usePage().props.flash = { error: error.cover };
+            usePage().props.flash = {
+                error: {
+                    message: trans("There is something wrong"),
+                    description: error.cover,
+                },
+            };
         },
     });
 };

@@ -14,7 +14,16 @@
                         </div>
                         <div
                             class="relative -mt-16 ms-8 h-28 w-28 overflow-hidden rounded-full border-4 border-white bg-neutral-200 shadow"
-                        ></div>
+                        >
+                            <UserAvatar
+                                class="mt-2.5"
+                                :user="{
+                                    avatar: props.user.avatar,
+                                    first_name: props.user.first_name,
+                                }"
+                                :editable="true"
+                            />
+                        </div>
                         <div
                             class="relative mb-4 mt-3 grid grid-cols-5 ps-8 text-left"
                         >
@@ -44,6 +53,7 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import UserCover from "@Components/User/UserCover.vue";
+import UserAvatar from "@/Components/User/UserAvatar.vue";
 
 const props = defineProps({
     user: {

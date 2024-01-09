@@ -39,6 +39,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
             # Profile Uploads
             Route::name('upload.')->prefix('upload')->group(function () {
                 Route::post('cover', [UploadImagesController::class, 'cover'])->name('cover');
+                Route::post('avatar', [UploadImagesController::class, 'avatar'])->name('avatar');
             });
         });
     });

@@ -37,7 +37,7 @@ const toastClass = computed(() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-    @apply duration-500;
+    @apply duration-500 ease-out;
 }
 .fade-enter-from {
     @apply translate-y-full opacity-0;

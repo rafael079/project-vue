@@ -1,8 +1,8 @@
 <template>
-    <AppToast :show="isVisible" placement="top-end">
+    <AppToast :show="isVisible" :placement="placement">
         <AppFlashMessages
             v-for="(message, index) in messages"
-            :key="index"
+            :key="componentKey + index"
             :message="message"
             @remove="remove(index)"
         />
@@ -20,7 +20,13 @@ const messages = ref([]);
 
 const isRequestFromHistory = ref(false);
 
+const placement = ref("top");
+
 const flash = computed(() => usePage().props.flash || "");
+
+const duration = ref(7000);
+
+const componentKey = ref(0);
 
 const popStateListener = () => (isRequestFromHistory.value = true);
 
@@ -41,10 +47,17 @@ watch(flash, (newFlash) => {
                     typeof value[1] === "object" ? value[1].description : null,
                 type: value[0],
                 duration:
-                    typeof value[1] === "object" ? value[1].duration : 7000,
+                    typeof value[1] === "object"
+                        ? value[1].duration ?? duration.value
+                        : duration.value,
             });
+
+            if (typeof value[1] === "object" && value[1].placement) {
+                placement.value = value[1].placement;
+            }
         }
     });
+
     isVisible.value = true;
 });
 
@@ -54,6 +67,8 @@ const remove = (index) => {
     if (messages.value.length <= 0) {
         isVisible.value = false;
     }
+
+    componentKey.value += 1;
 };
 
 onMounted(() => {
