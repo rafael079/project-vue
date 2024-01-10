@@ -25,7 +25,7 @@
             placement="top-center"
             @close="closeSignupModal"
         >
-            <div class="px-5 py-5 lg:px-6">
+            <div class="px-7 py-6 lg:px-8">
                 <div class="border-b border-neutral-100 pb-5 text-center">
                     <h2
                         class="block text-2xl font-bold uppercase tracking-tight text-neutral-600"

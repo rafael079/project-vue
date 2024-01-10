@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\ProfileUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -19,5 +20,12 @@ class ProfileController extends Controller
                 'edit' => Auth::check() && Auth::user()->is($user),
             ],
         ]);
+    }
+
+    public function update(ProfileUpdateRequest $profileUpdateRequest)
+    {
+        $profileUpdateRequest->user()->update($profileUpdateRequest->validated());
+
+        return redirect()->route('users.profile.show', ['user' => $profileUpdateRequest->username])->with('success', __('Your Profile Has Been Updated'));
     }
 }

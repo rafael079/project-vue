@@ -19,15 +19,15 @@
                                 class="mt-2.5"
                                 :user="{
                                     avatar: props.user.avatar,
-                                    first_name: props.user.first_name,
+                                    first_name: props.user.first_name
                                 }"
                                 :editable="true"
                             />
                         </div>
                         <div
-                            class="relative mb-4 mt-3 grid grid-cols-5 ps-8 text-left"
+                            class="relative mb-4 mt-3 flex gap-x-2 ps-8 text-left"
                         >
-                            <div class="col-span-3 py-2 pe-2">
+                            <div class="py-2 pe-2">
                                 <div>
                                     <h3
                                         class="inline-block text-xl font-bold text-neutral-700"
@@ -40,6 +40,14 @@
                                     <span>@</span>{{ user.username }}
                                 </p>
                             </div>
+                            <div class="flex items-center">
+                                <UserEditProfile
+                                    v-if="
+                                        $page.props.auth.user &&
+                                        $page.props.permissions.edit
+                                    "
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,18 +59,19 @@
     </div>
 </template>
 <script setup>
-import { Head } from "@inertiajs/vue3";
-import UserCover from "@Components/User/UserCover.vue";
-import UserAvatar from "@/Components/User/UserAvatar.vue";
+import { Head } from '@inertiajs/vue3';
+import UserCover from '@Components/User/UserCover.vue';
+import UserAvatar from '@/Components/User/UserAvatar.vue';
+import UserEditProfile from '@/Components/User/UserEditProfile.vue';
 
 const props = defineProps({
     user: {
         type: Object,
-        required: true,
+        required: true
     },
     permissions: {
         type: Object,
-        required: true,
-    },
+        required: true
+    }
 });
 </script>

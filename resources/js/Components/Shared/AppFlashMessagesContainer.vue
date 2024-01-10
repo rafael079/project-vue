@@ -9,10 +9,10 @@
     </AppToast>
 </template>
 <script setup>
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
-import { usePage } from "@inertiajs/vue3";
-import AppToast from "@/Components/Shared/AppToast.vue";
-import AppFlashMessages from "@/Components/Shared/AppFlashMessages.vue";
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import AppToast from '@/Components/Shared/AppToast.vue';
+import AppFlashMessages from '@/Components/Shared/AppFlashMessages.vue';
 
 const isVisible = ref(false);
 
@@ -20,9 +20,9 @@ const messages = ref([]);
 
 const isRequestFromHistory = ref(false);
 
-const placement = ref("top");
+const placement = ref('top-end');
 
-const flash = computed(() => usePage().props.flash || "");
+const flash = computed(() => usePage().props.flash || '');
 
 const duration = ref(7000);
 
@@ -42,17 +42,17 @@ watch(flash, (newFlash) => {
         if (value[1]) {
             messages.value.unshift({
                 message:
-                    typeof value[1] === "object" ? value[1].message : value[1],
+                    typeof value[1] === 'object' ? value[1].message : value[1],
                 description:
-                    typeof value[1] === "object" ? value[1].description : null,
+                    typeof value[1] === 'object' ? value[1].description : null,
                 type: value[0],
                 duration:
-                    typeof value[1] === "object"
+                    typeof value[1] === 'object'
                         ? value[1].duration ?? duration.value
-                        : duration.value,
+                        : duration.value
             });
 
-            if (typeof value[1] === "object" && value[1].placement) {
+            if (typeof value[1] === 'object' && value[1].placement) {
                 placement.value = value[1].placement;
             }
         }
@@ -72,10 +72,10 @@ const remove = (index) => {
 };
 
 onMounted(() => {
-    window.addEventListener("popstate", popStateListener);
+    window.addEventListener('popstate', popStateListener);
 });
 
 onUnmounted(() => {
-    window.removeEventListener("popstate", popStateListener);
+    window.removeEventListener('popstate', popStateListener);
 });
 </script>

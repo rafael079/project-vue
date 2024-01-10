@@ -15,7 +15,7 @@
 
                         <!-- search -->
                         <div
-                            class="hidden w-96 rounded-full bg-neutral-200 py-1.5 px-3 text-sm text-neutral-500 lg:flex"
+                            class="hidden w-96 rounded-full bg-neutral-200 px-3 py-1.5 text-sm text-neutral-500 lg:flex"
                         >
                             search
                         </div>
@@ -48,12 +48,12 @@
     </div>
 </template>
 <script setup>
-import { Link } from "@inertiajs/vue3";
-import AppLogo from "@Components/Shared/AppLogo.vue";
-import SignupNavigation from "@Components/User/SignupNavigation.vue";
-import LoginNavigation from "@/Components/User/LoginNavigation.vue";
-import NavigationDropdownUsers from "@/Components/User/NavigationDropdownUsers.vue";
-import AppFlashMessagesContainer from "@/Components/Shared/AppFlashMessagesContainer.vue";
+import { Link } from '@inertiajs/vue3';
+import AppLogo from '@Components/Shared/AppLogo.vue';
+import SignupNavigation from '@Components/User/SignupNavigation.vue';
+import LoginNavigation from '@/Components/User/LoginNavigation.vue';
+import NavigationDropdownUsers from '@/Components/User/NavigationDropdownUsers.vue';
+import AppFlashMessagesContainer from '@/Components/Shared/AppFlashMessagesContainer.vue';
 </script>
 <style lang="scss" scoped>
 .fade-enter-active,

@@ -18,7 +18,7 @@ class UploadImagesController extends Controller
 
             $avatarUploadRequest->user()->update(['avatar' => $avatar]);
 
-            return back()->with('success', __('Your Profile Has Been Updated!'));
+            return back()->with('success', __('Your Profile Has Been Updated'));
         }
 
         return back()->with('error', __('An error occurred here. Try again'));
@@ -32,7 +32,7 @@ class UploadImagesController extends Controller
         if ($cover) {
             $coverUploadRequest->user()->update(['cover' => $cover]);
 
-            return back()->with('success', __('Your Profile Has Been Updated!'));
+            return back()->with('success', __('Your Profile Has Been Updated'));
         }
 
         return back()->with('error', __('An error occurred here. Try again'));

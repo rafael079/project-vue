@@ -3,6 +3,16 @@
         <template #trigger>
             <div class="group flex shrink-0 items-center">
                 <span class="sr-only">{{ __("Menu") }}</span>
+                <div
+                    class="relative h-9 w-9 overflow-hidden rounded-full bg-neutral-200 p-px text-center"
+                >
+                    <UserAvatar
+                        :user="{
+                            avatar: $page.props.auth.user.avatar,
+                            first_name: $page.props.auth.user.first_name,
+                        }"
+                    />
+                </div>
                 <p class="ml-2 hidden text-left text-xs sm:block">
                     <strong
                         class="hidden text-left capitalize text-neutral-700 sm:block"
@@ -76,4 +86,5 @@
 import { Link } from "@inertiajs/vue3";
 import { truncate } from "@/Utils/text";
 import DropdownMenu from "@Components/Shared/DropdownMenu.vue";
+import UserAvatar from "@Components/User/UserAvatar.vue";
 </script>

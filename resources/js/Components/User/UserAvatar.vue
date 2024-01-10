@@ -16,7 +16,7 @@
         <CaUserFilled
             v-else
             v-bind="$attrs"
-            :title="$page.props.user.first_name"
+            :title="props.user.first_name"
             class="absolute left-0 top-1 h-full w-full object-cover object-center text-white"
         />
 

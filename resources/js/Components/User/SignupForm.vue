@@ -7,7 +7,6 @@
                 <div>
                     <InputText
                         id="signup-first-name"
-                        type="text"
                         v-model="form.first_name"
                         :label="__('Your First Name')"
                         autofocus
@@ -24,7 +23,6 @@
                 <div>
                     <InputText
                         id="signup-last-name"
-                        type="text"
                         v-model="form.last_name"
                         autocomplete="family-name"
                         :label="__('Your Last Name')"
@@ -42,14 +40,13 @@
             <div>
                 <InputText
                     id="signup-email"
-                    type="email"
                     v-model="form.email"
+                    type="email"
                     autocomplete="email"
                     :label="__('Email Address')"
                     :error="form.errors.email"
                     :placeholder="__('Email Address')"
                     required
-                    @change="validate('email')"
                 >
                     <template #suffix>
                         <FlMailOpenPerson class="h-5 w-5 opacity-15" />
@@ -72,56 +69,51 @@
             <div
                 class="my-3.5 block max-w-sm text-left text-sm text-neutral-500"
             >
-                {{ __("By registering, you are agreeing to our") }}
+                {{ __('By registering, you are agreeing to our') }}
                 <Link
                     :title="__('Terms of use')"
                     href="#"
                     class="font-medium capitalize text-blue-600 decoration-2 hover:underline"
                 >
-                    {{ __("Terms of use") }}
+                    {{ __('Terms of use') }}
                 </Link>
-                {{ __("and") }}
+                {{ __('and') }}
                 <Link
                     :title="__('Privacy policy')"
                     href="#"
                     class="font-medium capitalize text-blue-600 decoration-2 hover:underline"
                 >
-                    {{ __("Privacy policy") }}
+                    {{ __('Privacy policy') }}
                 </Link>
             </div>
             <PrimaryButton
-                :loading="
-                    form.processing || Object.keys(form.errors).length !== 0
-                "
+                :loading="form.processing"
                 type="submit"
-                class="rounded py-3.5 font-semibold shadow-sm uppercase"
+                class="rounded py-3.5 font-semibold uppercase shadow-sm"
             >
-                {{ __("Sign Up") }}
+                {{ __('Sign Up') }}
             </PrimaryButton>
         </div>
     </form>
 </template>
 <script setup>
-import { Link, useForm } from "@inertiajs/vue3";
-import { useValidate } from "momentum-preflight";
-import PrimaryButton from "@Components/Form/PrimaryButton.vue";
-import InputText from "@Components/Form/InputText.vue";
-import InputPassword from "@Components/Form/InputPassword.vue";
-import LoaderCard from "@/Components/Shared/LoaderCard.vue";
+import { Link, useForm } from '@inertiajs/vue3';
+import PrimaryButton from '@Components/Form/PrimaryButton.vue';
+import InputText from '@Components/Form/InputText.vue';
+import InputPassword from '@Components/Form/InputPassword.vue';
+import LoaderCard from '@/Components/Shared/LoaderCard.vue';
 
 const form = useForm({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: ''
 });
 
-const validate = useValidate(form, route("register"), { debounce: 200 });
-
 const submit = () => {
-    form.post(route("register"), {
-        onFinish: () => form.reset("password"),
-        onSuccess: () => form.reset(),
+    form.post(route('register'), {
+        onFinish: () => form.reset('password'),
+        onSuccess: () => form.reset()
     });
 };
 </script>

@@ -36,6 +36,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::name('users.')->prefix('u')->group(function () {
         # Profile
         Route::name('profile.')->prefix('profile')->group(function () {
+
+            Route::patch('update', [ProfileController::class, 'update'])->name('update');
+
             # Profile Uploads
             Route::name('upload.')->prefix('upload')->group(function () {
                 Route::post('cover', [UploadImagesController::class, 'cover'])->name('cover');
