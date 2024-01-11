@@ -48,7 +48,7 @@
                 >
                     <template #prefix>
                         <span
-                            class="rounded-full bg-neutral-200/55 px-3 py-1 text-xs font-medium text-neutral-400"
+                            class="rounded-full bg-neutral-200/20 px-2 py-1 text-xs font-medium text-neutral-400"
                         >
                             {{ $page.props.router.url }}/u/
                         </span>

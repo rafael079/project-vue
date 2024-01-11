@@ -18,7 +18,7 @@
         >
             <div
                 v-if="$slots.prefix"
-                class="absolute left-2.5 top-1/2 -translate-y-1/2 transform items-center"
+                class="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4"
             >
                 <slot name="prefix" />
             </div>
@@ -29,6 +29,7 @@
                 :type="$attrs.type ?? 'text'"
                 :value="props.modelValue"
                 :maxlength="props.maxLength"
+                :class="{'pe-10': $slots.suffix}"
                 class="w-full border-none bg-transparent px-4 py-3.5 text-sm placeholder:text-neutral-400/80 focus:ring-0"
                 @input="$emit('update:modelValue', $event.target.value)"
             />
@@ -45,7 +46,7 @@
                 v-if="props.maxLength"
                 class="absolute -bottom-2.5 right-6 hidden rounded-full border border-transparent bg-gray-400 px-2.5 py-0.5 text-xs text-white group-focus-within:inline-block"
                 :class="{
-                    '!inline-block !bg-red-200 font-medium text-red-600':
+                    '!inline-block !bg-red-600 font-medium':
                         props.modelValue &&
                         props.modelValue.length == props.maxLength
                 }"

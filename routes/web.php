@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Content\PostController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\User\AuthenticatedSessionController;
@@ -46,6 +47,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
             });
         });
     });
+
+    # Content
+    Route::name('posts.')->prefix('p')->group(function () {
+        Route::get('create', [PostController::class, 'create'])->name('create');
+        Route::post('store', [PostController::class, 'store'])->name('store');
+    });
+});
+
+# Content Post 
+Route::name('posts.')->prefix('p')->group(function () {
+    Route::get('{id}/{slug}', [PostController::class, 'show'])->name('show');
 });
 
 # Users

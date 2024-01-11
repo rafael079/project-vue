@@ -4,7 +4,7 @@
             <div class="group flex shrink-0 items-center">
                 <span class="sr-only">{{ __("Menu") }}</span>
                 <div
-                    class="relative h-9 w-9 overflow-hidden rounded-full bg-neutral-200 p-px text-center"
+                    class="relative h-9 w-9 overflow-hidden rounded-full bg-neutral-200 p-0.5 text-center"
                 >
                     <UserAvatar
                         :user="{

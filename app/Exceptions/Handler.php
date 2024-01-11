@@ -52,6 +52,10 @@ class Handler extends ExceptionHandler
     {
         $response = parent::render($request, $e);
 
+        if (app()->environment(['local', 'testing'])) {
+            return $response;
+        }
+
         $status = $response->getStatusCode();
 
         if ($response->status() === 419) {
