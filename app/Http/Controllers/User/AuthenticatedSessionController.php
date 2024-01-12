@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\AuthenticatedSessionStoreRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,10 @@ class AuthenticatedSessionController extends Controller
 
         $authenticatedSessionStoreRequest->session()->regenerate();
 
-        return redirect()->route('home');
+        return redirect()->route(
+            $authenticatedSessionStoreRequest->redirect['route'] ?? RouteServiceProvider::HOME,
+            $authenticatedSessionStoreRequest->redirect['params'] ?? null
+        );
     }
 
     public function destroy(Request $request)

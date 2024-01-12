@@ -26,7 +26,7 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:191'],
             'last_name' => ['required', 'string', 'max:191'],
-            'username' => ['required', 'string', 'max:191', 'alpha_num', Rule::unique('users')->ignore($this->user()->id)],
+            'username' => ['required', 'string', 'max:191', 'regex:/\w*$/', Rule::unique('users')->ignore($this->user()->id)],
         ];
     }
 }

@@ -29,7 +29,8 @@ class AuthenticatedSessionStoreRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email', 'max:191'],
             'password' => ['required', 'string'],
-            'remember' => ['nullable', 'boolean']
+            'remember' => ['nullable', 'boolean'],
+            'redirect' => ['nullable']
         ];
     }
 

@@ -1,7 +1,6 @@
 <template>
     <form @submit.prevent="submit">
         <LoaderCard v-if="form.processing" />
-
         <div class="mt-7 grid gap-y-6">
             <div>
                 <InputText
@@ -53,7 +52,7 @@
                         href="#"
                         class="font-medium text-blue-600 decoration-2 hover:underline"
                     >
-                        {{ __("Forgot password") }}?
+                        {{ __('Forgot password') }}?
                     </Link>
                 </div>
             </div>
@@ -62,29 +61,30 @@
                 type="submit"
                 class="rounded py-3.5 font-medium uppercase"
             >
-                {{ __("Log in") }}
+                {{ __('Log in') }}
             </PrimaryButton>
         </div>
     </form>
 </template>
 <script setup>
-import { Link, useForm } from "@inertiajs/vue3";
-import InputText from "@Components/Form/InputText.vue";
-import InputPassword from "@Components/Form/InputPassword.vue";
-import PrimaryButton from "@Components/Form/PrimaryButton.vue";
-import InputSwitchToggle from "@Components/Form/InputSwitchToggle.vue";
-import LoaderCard from "@Components/Shared/LoaderCard.vue";
+import { Link, useForm } from '@inertiajs/vue3';
+import InputText from '@Components/Form/InputText.vue';
+import InputPassword from '@Components/Form/InputPassword.vue';
+import PrimaryButton from '@Components/Form/PrimaryButton.vue';
+import InputSwitchToggle from '@Components/Form/InputSwitchToggle.vue';
+import LoaderCard from '@Components/Shared/LoaderCard.vue';
 
 const form = useForm({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     remember: false,
+    redirect: { route: route().current(), params: route().params }
 });
 
 const submit = () => {
-    form.post(route("login"), {
-        onFinish: () => form.reset("password"),
-        onSuccess: () => form.reset(),
+    form.post(route('login'), {
+        onFinish: () => form.reset('password'),
+        onSuccess: () => form.reset()
     });
 };
 </script>

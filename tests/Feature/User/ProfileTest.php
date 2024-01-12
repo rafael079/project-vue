@@ -36,7 +36,7 @@ class ProfileTest extends TestCase
         $data = [
             'first_name' => fake()->firstName,
             'last_name' => fake()->lastName,
-            'username' => fake()->userName,
+            'username' => fake()->userName(),
         ];
 
         $response = $this
