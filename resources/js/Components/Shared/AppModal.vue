@@ -16,8 +16,8 @@
                         :class="[
                             props.backdrop ? blurEffectClass : '',
                             {
-                                'bg-neutral-900 bg-opacity-50': props.backdrop,
-                            },
+                                'bg-neutral-900 bg-opacity-50': props.backdrop
+                            }
                         ]"
                         class="fixed inset-0"
                     />
@@ -42,7 +42,7 @@
                                 :class="[
                                     maxWidthClass,
                                     { 'shadow-neutral-400': !props.backdrop },
-                                    { 'shadow-neutral-600': props.backdrop },
+                                    { 'shadow-neutral-600': props.backdrop }
                                 ]"
                                 class="relative w-full transform overflow-hidden rounded bg-white text-left align-middle shadow transition-all"
                             >
@@ -52,11 +52,11 @@
                                         :title="__('Close')"
                                         @click="$emit('close')"
                                     >
-                                        <MaCross
+                                        <McCloseFill
                                             class="h-4 w-4 text-inherit opacity-50"
                                         />
                                         <span class="sr-only">
-                                            {{ __("Close") }}
+                                            {{ __('Close') }}
                                         </span>
                                     </AppButton>
                                 </DialogTitle>
@@ -73,91 +73,91 @@
     </Teleport>
 </template>
 <script setup>
-import { computed, onMounted, onUnmounted } from "vue";
+import { computed, onMounted, onUnmounted } from 'vue';
 import {
     TransitionRoot,
     TransitionChild,
     Dialog,
     DialogPanel,
     DialogTitle,
-    DialogDescription,
-} from "@headlessui/vue";
-import AppButton from "@Components/Form/AppButton.vue";
+    DialogDescription
+} from '@headlessui/vue';
+import AppButton from '@Components/Form/AppButton.vue';
 const props = defineProps({
     backdrop: {
         type: Boolean,
-        default: true,
+        default: true
     },
     blurEffect: {
         type: String,
-        default: null,
+        default: null
     },
     closeable: {
         type: Boolean,
-        default: true,
+        default: true
     },
     maxWidth: {
         type: String,
-        default: "2xl",
+        default: '2xl'
     },
     placement: {
         type: String,
-        default: "top-center",
+        default: 'top-center'
     },
     show: {
         type: Boolean,
-        default: false,
-    },
+        default: false
+    }
 });
 
 const blurEffectClass = computed(() => {
     return {
-        sm: "backdrop-blur-sm",
-        lg: "backdrop-blur-lg",
-        xl: "backdrop-blur-xl",
-        "2xl": "backdrop-blur-2xl",
-        "3xl": "backdrop-blur-3xl",
+        sm: 'backdrop-blur-sm',
+        lg: 'backdrop-blur-lg',
+        xl: 'backdrop-blur-xl',
+        '2xl': 'backdrop-blur-2xl',
+        '3xl': 'backdrop-blur-3xl'
     }[props.blurEffect];
 });
 
 const maxWidthClass = computed(() => {
     return {
-        sm: "sm:max-w-sm",
-        md: "sm:max-w-md",
-        lg: "sm:max-w-lg",
-        xl: "sm:max-w-xl",
-        "2xl": "sm:max-w-2xl",
-        "3xl": "sm:max-w-3xl",
-        "4xl": "sm:max-w-4xl",
+        sm: 'sm:max-w-sm',
+        md: 'sm:max-w-md',
+        lg: 'sm:max-w-lg',
+        xl: 'sm:max-w-xl',
+        '2xl': 'sm:max-w-2xl',
+        '3xl': 'sm:max-w-3xl',
+        '4xl': 'sm:max-w-4xl'
     }[props.maxWidth];
 });
 
 const placementClass = computed(() => {
     return {
-        "top-center": "inset-x-0 top-1 overflow-y-auto 2xl:top-5",
-        center: "inset-x-0 top-1/2 -translate-y-1/2 overflow-y-auto",
-        "bottom-center": "inset-x-0 bottom-1 overflow-y-auto 2xl:bottom-5",
+        'top-center': 'inset-x-0 top-1 overflow-y-auto 2xl:top-5',
+        center: 'inset-x-0 top-1/2 -translate-y-1/2 overflow-y-auto',
+        'bottom-center': 'inset-x-0 bottom-1 overflow-y-auto 2xl:bottom-5'
     }[props.placement];
 });
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close']);
 
 const close = () => {
     if (props.closeable) {
-        emit("close");
+        emit('close');
     }
 };
 
 const closeOnEscape = (e) => {
-    if (e.key === "Escape" && props.show) {
-        emit("close");
+    if (e.key === 'Escape' && props.show) {
+        emit('close');
     }
 };
 
-onMounted(() => document.addEventListener("keydown", closeOnEscape));
+onMounted(() => document.addEventListener('keydown', closeOnEscape));
 
 onUnmounted(() => {
-    document.removeEventListener("keydown", closeOnEscape);
+    document.removeEventListener('keydown', closeOnEscape);
     document.body.style.overflow = null;
 });
 </script>

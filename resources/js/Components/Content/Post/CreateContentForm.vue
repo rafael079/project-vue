@@ -22,6 +22,38 @@
                     </template>
                 </InputText>
             </div>
+            <div class="mt-2 flex flex-wrap gap-x-1.5 lowercase">
+                <Link
+                    href="#"
+                    class="group flex items-center rounded rounded-s-none border-l-2 border-orange-400 bg-orange-100 px-2 py-1 text-sm font-medium text-neutral-500 shadow-inner transition duration-150 hover:text-neutral-600"
+                >
+                    <McLayout5Fill
+                        class="me-1.5 h-4 w-4 text-orange-600 group-hover:text-orange-600"
+                    />{{ __('Content Text') }}
+                </Link>
+                <Link
+                    href="#"
+                    class="group flex items-center rounded bg-neutral-100 px-2 py-1 text-sm text-neutral-400 transition duration-150 hover:bg-fuchsia-100 hover:text-neutral-600 hover:shadow"
+                >
+                    <McPhotoAlbum2Fill
+                        class="me-1.5 h-4 w-4 group-hover:text-fuchsia-600"
+                    />{{ __('Add Photo & Video') }}
+                </Link>
+                <Link
+                    href="#"
+                    class="group flex items-center rounded bg-neutral-100 px-2 py-1 text-sm text-neutral-400 transition duration-150 hover:bg-green-100 hover:text-neutral-600 hover:shadow"
+                >
+                    <McLink3Fill
+                        class="me-1.5 h-4 w-4 group-hover:text-green-600"
+                    />{{ __('Content By Link') }}
+                </Link>
+            </div>
+            <div>
+                <AppTipTapEditor
+                    v-model="form.content"
+                    :placeholder="__('Place your content (optional)')"
+                />
+            </div>
             <div>
                 <PrimaryButton
                     :loading="form.processing"
@@ -42,14 +74,16 @@
     </form>
 </template>
 <script setup>
-import { router, useForm } from '@inertiajs/vue3';
+import { Link, router, useForm } from '@inertiajs/vue3';
 import InputText from '@/Components/Form/InputText.vue';
 import PrimaryButton from '@/Components/Form/PrimaryButton.vue';
 import AppButton from '@/Components/Form/AppButton.vue';
 import LoaderCard from '@/Components/Shared/LoaderCard.vue';
+import AppTipTapEditor from '@/Components/Form/AppTipTapEditor.vue';
 
 const form = useForm({
-    title: ''
+    title: '',
+    content: ''
 });
 
 const create = () => {

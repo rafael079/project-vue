@@ -20,26 +20,26 @@
             <div class="mt-2 flex flex-wrap gap-x-2 lowercase">
                 <Link
                     href="#"
-                    class="flex items-center rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-medium text-neutral-400 shadow hover:bg-primary-100/75 hover:text-secundary-600 hover:underline"
+                    class="group flex items-center rounded bg-neutral-100 px-2 py-1.5 text-xs font-medium text-neutral-400 shadow hover:bg-primary-100/75 hover:text-secundary-600"
                 >
-                    <McLink3Fill class="me-1.5 h-4 w-4 text-green-600" />{{
-                        __('Add Content By Link')
-                    }}
+                    <McLink3Fill
+                        class="me-1.5 h-4 w-4 group-hover:text-green-600"
+                    />{{ __('Add Content By Link') }}
                 </Link>
                 <Link
                     href="#"
-                    class="flex items-center rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-medium text-neutral-400 shadow hover:bg-primary-100/75 hover:text-secundary-600 hover:underline"
+                    class="group flex items-center rounded bg-neutral-100 px-2 py-1.5 text-xs font-medium text-neutral-400 shadow hover:bg-primary-100/75 hover:text-secundary-600"
                 >
-                    <GlMediaBroken class="me-1.5 h-4 w-4 text-fuchsia-600" />{{
-                        __('Add Images & Video')
-                    }}
+                    <McPhotoAlbum2Fill
+                        class="me-1.5 h-4 w-4 group-hover:text-fuchsia-600"
+                    />{{ __('Add Images & Video') }}
                 </Link>
                 <Link
                     href="#"
-                    class="flex items-center rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-medium text-neutral-400 shadow hover:bg-primary-100/75 hover:text-secundary-600 hover:underline"
+                    class="group flex items-center rounded bg-neutral-100 px-2 py-1.5 text-xs font-medium text-neutral-400 shadow hover:bg-primary-100/75 hover:text-secundary-600"
                 >
                     <BxDotsHorizontalRounded
-                        class="me-1.5 h-4 w-4 text-orange-600"
+                        class="me-1.5 h-4 w-4 group-hover:text-orange-600"
                     />{{ __('More Options') }}
                 </Link>
             </div>

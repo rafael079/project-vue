@@ -24,6 +24,7 @@ class PostStoreRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:300'],
+            'content' => ['nullable', 'string'],
         ];
     }
 }

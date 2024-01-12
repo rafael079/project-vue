@@ -2,14 +2,14 @@
     <DropdownMenu>
         <template #trigger>
             <div class="group flex shrink-0 items-center">
-                <span class="sr-only">{{ __("Menu") }}</span>
+                <span class="sr-only">{{ __('Menu') }}</span>
                 <div
                     class="relative h-9 w-9 overflow-hidden rounded-full bg-neutral-200 p-0.5 text-center"
                 >
                     <UserAvatar
                         :user="{
                             avatar: $page.props.auth.user.avatar,
-                            first_name: $page.props.auth.user.first_name,
+                            first_name: $page.props.auth.user.first_name
                         }"
                     />
                 </div>
@@ -20,7 +20,7 @@
                         {{
                             truncate(
                                 $page.props.auth.user.first_name +
-                                    " " +
+                                    ' ' +
                                     $page.props.auth.user.last_name,
                                 19
                             )
@@ -32,7 +32,7 @@
                     </span>
                 </p>
                 <BxSolidChevronDown
-                    class="hidden w-4 h-4 ml-4 text-neutral-400 transition group-hover:text-neutral-700 sm:block"
+                    class="ml-4 hidden h-4 w-4 text-neutral-400 transition group-hover:text-neutral-700 sm:block"
                 />
             </div>
         </template>
@@ -43,21 +43,21 @@
                 <span
                     class="block px-3 py-2 text-xs font-semibold uppercase text-neutral-400"
                 >
-                    {{ __("Account") }}
+                    {{ __('Account') }}
                 </span>
                 <Link
                     preserve-state
                     :href="
                         route('users.profile.show', {
-                            username: $page.props.auth.user.username,
+                            username: $page.props.auth.user.username
                         })
                     "
-                    class="block w-full rounded px-2.5 py-2 text-left leading-5 transition duration-150 ease-in-out items-center hover:bg-primary-100 hover:text-primary-700 focus:bg-primary-100 focus:text-primary-700 focus:outline-none"
+                    class="block w-full items-center rounded px-2.5 py-2 text-left leading-5 transition duration-150 ease-in-out hover:bg-primary-100 hover:text-primary-700 focus:bg-primary-100 focus:text-primary-700 focus:outline-none"
                 >
-                    <FlFilledPersonLink
+                    <McContactsFill
                         class="me-1 inline-flex h-5 w-5 opacity-30"
                     />
-                    {{ __("Your Page") }}
+                    {{ __('Your Page') }}
                 </Link>
             </div>
             <div
@@ -72,19 +72,19 @@
                     type="button"
                     class="block w-full rounded px-2.5 py-2 text-left leading-5 transition duration-150 ease-in-out hover:bg-primary-100 hover:text-primary-700 focus:bg-primary-100 focus:text-primary-700 focus:outline-none"
                 >
-                    <FlFilledSignOut
+                    <McExitDoorFill
                         class="me-1 inline-flex h-5 w-5 opacity-30"
                     />
 
-                    {{ __("Sign Out") }}
+                    {{ __('Sign Out') }}
                 </Link>
             </div>
         </template>
     </DropdownMenu>
 </template>
 <script setup>
-import { Link } from "@inertiajs/vue3";
-import { truncate } from "@/Utils/text";
-import DropdownMenu from "@Components/Shared/DropdownMenu.vue";
-import UserAvatar from "@Components/User/UserAvatar.vue";
+import { Link } from '@inertiajs/vue3';
+import { truncate } from '@/Utils/text';
+import DropdownMenu from '@Components/Shared/DropdownMenu.vue';
+import UserAvatar from '@Components/User/UserAvatar.vue';
 </script>

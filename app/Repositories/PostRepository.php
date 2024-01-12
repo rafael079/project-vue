@@ -27,7 +27,7 @@ class PostRepository implements PostRepositoryInterface
             'imported' => isset($request->url),
         ]);
     }
-
+    
     public function getById(string $id): Post
     {
         $id = (new HashIdService)->decode($id);

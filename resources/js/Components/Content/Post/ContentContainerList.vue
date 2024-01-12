@@ -2,7 +2,7 @@
     <div class="col-span-4 grid grid-cols-1 gap-y-2.5 md:col-span-2">
         <!-- skeleton -->
         <template v-if="isLoadingPosts">
-            <ContentItemSkeleton v-for="n in 4" :key="n" />
+            <ContentItemSkeleton v-for="n in 6" :key="n" />
         </template>
         <!-- skeleton -->
         <template v-else>

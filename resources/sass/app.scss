@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// Tooltips
+@import "floating-vue/dist/style.css";
+
+.v-popper__popper {
+    @apply text-xs font-medium;
+}
+
+.v-popper--theme-tooltip {
+    .v-popper__inner {
+        border-radius: 4px;
+        @apply bg-slate-900/80;
+    }
+    .v-popper__arrow-outer {
+        @apply border-slate-900/80;
+    }
+}

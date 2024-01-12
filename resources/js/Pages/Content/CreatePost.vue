@@ -9,14 +9,12 @@
                     <div
                         class="relative overflow-hidden rounded bg-white shadow"
                     >
-                        <div
-                            class="rounded-t border-b border-neutral-200 bg-neutral-300/25 px-8 py-2.5"
-                        >
+                        <div class="rounded-t border-b border-neutral-100 px-8 py-3">
                             <h2
                                 class="block items-center text-xl font-bold uppercase tracking-tight text-neutral-500"
                             >
-                                <UnCreateDashboard
-                                    class="me-1 mt-2 inline-block h-7 w-7 opacity-25"
+                                <McClassify2Line
+                                    class="me-1 mt-2 inline-block h-7 w-7 opacity-35"
                                 />
                                 {{ __('Create new Content') }}
                             </h2>

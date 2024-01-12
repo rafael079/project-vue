@@ -14,9 +14,15 @@
             </div>
 
             <h3
-                class="inline-block h-3.5 mt-3 rounded-md bg-gray-200"
+                class="mt-5 inline-block h-5 rounded-md bg-gray-200"
                 style="width: 75%"
             ></h3>
+
+            <ul class="mt-5 mb-4 w-[95%] space-y-3">
+                <li class="mb-4 h-4 w-full rounded-md bg-neutral-200"></li>
+                <li class="h-4 w-full rounded-md bg-neutral-200"></li>
+                <li class="h-4 w-full rounded-md bg-neutral-200"></li>
+            </ul>
         </div>
     </div>
 </template>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class Post extends Model
 {
@@ -24,6 +25,15 @@ class Post extends Model
         'excerpt',
         'source',
         'imported',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'content' => PurifyHtmlOnGet::class,
     ];
 
     /**

@@ -3,10 +3,10 @@
         <AppButton
             :disabled="$page.component === 'Content/CreatePost'"
             :title="__('Create your content here')"
-            class="me-3 rounded-full border border-transparent bg-neutral-100 px-1 py-1 text-secundary-600 shadow transition delay-100 hover:bg-neutral-200 hover:text-secundary-800"
+            class="me-3 rounded-full border border-transparent bg-neutral-100 px-1.5 py-1.5 text-secundary-600 shadow transition delay-150 hover:bg-primary-200 hover:text-secundary-800"
             @click="openCreateContentForm"
         >
-            <MdOutlinedAdd class="h-6 w-6" />
+            <McAddFill class="h-5 w-5" />
         </AppButton>
     </div>
 </template>
