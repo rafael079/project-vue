@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Content\PostController;
+use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,12 @@ Route::name('v1.')->prefix('v1')->group(function () {
     Route::name('posts.')->group(function () {
         # List Posts
         Route::get('posts', [PostController::class, 'index'])->name('list');
+    });
+
+    # Users
+    Route::name('users.')->group(function () {
+        # Check Users
+        Route::get('check-username/{username}', [UserController::class, 'checkIfUsernameExists'])->name('check-username');
+        Route::get('check-email/{email}', [UserController::class, 'checkIfEmailExists'])->name('check-email');
     });
 });

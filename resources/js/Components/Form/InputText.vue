@@ -18,7 +18,7 @@
         >
             <div
                 v-if="$slots.prefix"
-                class="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4"
+                class="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-1"
             >
                 <slot name="prefix" />
             </div>

@@ -47,9 +47,14 @@
                     :error="form.errors.email"
                     :placeholder="__('Email Address')"
                     required
+                    @change="checkIfEmailExists(form.email)"
                 >
                     <template #suffix>
-                        <FlMailOpenPerson class="h-5 w-5 opacity-15" />
+                        <McLoadingFill
+                            v-if="isLoadingCheck"
+                            class="h-5 w-5 animate-spin text-primary-700"
+                        />
+                        <FlMailOpenPerson v-else class="h-5 w-5 opacity-15" />
                     </template>
                 </InputText>
             </div>
@@ -87,7 +92,7 @@
                 </Link>
             </div>
             <PrimaryButton
-                :loading="form.processing"
+                :loading="form.processing || form.hasErrors || isLoadingCheck"
                 type="submit"
                 class="rounded py-3.5 font-semibold uppercase shadow-sm"
             >
@@ -97,11 +102,31 @@
     </form>
 </template>
 <script setup>
+import { ref } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
+import { trans } from 'laravel-vue-i18n';
 import PrimaryButton from '@Components/Form/PrimaryButton.vue';
 import InputText from '@Components/Form/InputText.vue';
 import InputPassword from '@Components/Form/InputPassword.vue';
 import LoaderCard from '@/Components/Shared/LoaderCard.vue';
+
+import ApiUser from '@/Api/users';
+
+const isLoadingCheck = ref(false);
+
+const checkIfEmailExists = async (data) => {
+    isLoadingCheck.value = true;
+
+    await ApiUser.checkEmail(data).then(function (response) {
+        if (response.data) {
+            form.setError('email', trans('E-mail is already in use'));
+        } else {
+            form.clearErrors('email');
+        }
+
+        isLoadingCheck.value = false;
+    });
+};
 
 const form = useForm({
     first_name: '',
