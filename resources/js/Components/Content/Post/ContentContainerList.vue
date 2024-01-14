@@ -9,7 +9,7 @@
             <div
                 v-for="post in posts"
                 :key="post.id"
-                class="relative rounded bg-white shadow transition delay-75 duration-300 hover:bg-slate-100"
+                class="relative rounded bg-white shadow transition delay-75 duration-300 hover:bg-slate-50"
             >
                 <ContentListItem :post="post" />
             </div>

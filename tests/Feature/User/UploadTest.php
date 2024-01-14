@@ -11,9 +11,6 @@ use Tests\TestCase;
 
 class UploadTest extends TestCase
 {
-
-    use RefreshDatabase;
-
     /**
      * Upload de capa do usuário
      */

@@ -22,6 +22,10 @@ class PostResource extends JsonResource
             'excerpt' => $this->excerpt,
             'content' => $this->content,
             'author' => $this->user->only(['first_name', 'last_name', 'avatar', 'username']),
+            'total_votes' => $this->total_votes,
+            'has_voted' => $this->has_voted,
+            'has_upvoted' => $this->has_upvoted,
+            'has_downvoted' => $this->has_downvoted,
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }

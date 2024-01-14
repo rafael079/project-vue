@@ -1,9 +1,9 @@
 <template>
     <div
-        class="bg-white rounded border-t-[5px] bg-opacity-[.97] w-full text-sm p-1 shadow-md"
+        class="bg-white rounded border-t-[5px] bg-opacity-[.80] w-full text-sm p-1 shadow-md"
         :class="{
-            'border-green-700 bg-green-50': props.message.type === 'success',
-            'border-red-700 bg-red-50': props.message.type === 'error',
+            'border-green-700 bg-green-100': props.message.type === 'success',
+            'border-red-700 bg-red-100': props.message.type === 'error',
         }"
         role="alert"
     >
@@ -21,8 +21,8 @@
                 <h4
                     class="block font-semibold tracking-tighter text-neutral-700 capitalize"
                     :class="{
-                        'text-green-800': props.message.type === 'success',
-                        'text-red-800': props.message.type === 'error',
+                        'text-green-900': props.message.type === 'success',
+                        'text-red-900': props.message.type === 'error',
                     }"
                 >
                     {{ props.message.message }}

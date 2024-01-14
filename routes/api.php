@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Content\PostController;
+use App\Http\Controllers\Api\Content\VoteController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,15 @@ Route::name('v1.')->prefix('v1')->group(function () {
     Route::name('posts.')->group(function () {
         # List Posts
         Route::get('posts', [PostController::class, 'index'])->name('list');
+
+        # Auth
+        Route::middleware(['auth:sanctum'])->group(function () {
+            # Votes
+            Route::name('vote.')->prefix('vote')->group(function () {
+                Route::post('store', [VoteController::class, 'store'])->name('store');
+            });
+        });
+
     });
 
     # Users

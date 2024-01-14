@@ -7,6 +7,7 @@ use App\Services\Util\HashIdService;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostRepository implements PostRepositoryInterface
@@ -27,12 +28,16 @@ class PostRepository implements PostRepositoryInterface
             'imported' => isset($request->url),
         ]);
     }
-    
+
     public function getById(string $id): Post
     {
         $id = (new HashIdService)->decode($id);
 
         $post = Post::where(['id' => $id])->first();
+
+        if (Auth::check()) {
+            $post = Auth::user()->attachVoteStatus($post);
+        }
 
         return $post;
 
@@ -41,6 +46,11 @@ class PostRepository implements PostRepositoryInterface
     public function getAllPostsPublished(): Collection
     {
         $posts = Post::latest()->published()->get();
+
+        if (Auth::check()) {
+            $posts = Auth::user()->attachVoteStatus($posts);
+        }
+
         return $posts;
     }
 }
