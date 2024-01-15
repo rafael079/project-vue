@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\HashId;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,7 @@ class Post extends Model
      */
     protected $fillable = [
         'user_id',
+        'category_id',
         'title',
         'slug',
         'content',
@@ -34,11 +36,12 @@ class Post extends Model
      * @var array
      */
     protected $casts = [
+        'id' => HashId::class,
         'content' => PurifyHtmlOnGet::class,
     ];
 
     /**
-     * Scope a query to only include root comments.
+     * Scope a query to only posts published.
      */
     public function scopePublished(Builder $query): void
     {
@@ -51,5 +54,10 @@ class Post extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

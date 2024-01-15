@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Content\CategoryController;
 use App\Http\Controllers\Api\Content\PostController;
 use App\Http\Controllers\Api\Content\VoteController;
 use App\Http\Controllers\Api\User\UserController;
@@ -36,6 +37,12 @@ Route::name('v1.')->prefix('v1')->group(function () {
             });
         });
 
+    });
+
+    # Categories
+    Route::name('categories.')->group(function () {
+        # List Categories
+        Route::get('categories', [CategoryController::class, 'index'])->name('list');
     });
 
     # Users

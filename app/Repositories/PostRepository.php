@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contracts\Repository\PostRepositoryInterface;
+use App\Models\Category;
 use App\Services\Util\HashIdService;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Post;
@@ -22,6 +23,7 @@ class PostRepository implements PostRepositoryInterface
         return $request->user()->posts()->create([
             'slug' => Str::words(Str::slug($request->title), 22),
             'title' => $request->title,
+            'category_id' => $request->category,
             'content' => $request->content,
             'excerpt' => $request->content ? strip_tags($request->content) : null,
             'source' => $request->url,
@@ -43,9 +45,15 @@ class PostRepository implements PostRepositoryInterface
 
     }
 
-    public function getAllPostsPublished(): Collection
+    public function getAllPostsPublished(array $params = null): Collection
     {
-        $posts = Post::latest()->published()->get();
+        $posts = Post::latest()->published();
+
+        if (isset($params['category'])) {
+            $posts = $posts->where('category_id', $params['category']);
+        }
+
+        $posts = $posts->get();
 
         if (Auth::check()) {
             $posts = Auth::user()->attachVoteStatus($posts);

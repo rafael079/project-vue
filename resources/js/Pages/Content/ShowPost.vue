@@ -33,6 +33,28 @@
                         <!-- options -->
                         <div class="flex gap-x-1 px-7 pb-3">
                             <ContentVoting :post="props.post.data" />
+
+                            <div
+                                v-if="props.post.data.category"
+                                class="flex items-center"
+                            >
+                                <Link
+                                    :href="
+                                        route('category.show', {
+                                            category:
+                                                props.post.data.category.id,
+                                            slug: props.post.data.category.slug
+                                        })
+                                    "
+                                    class="inline-flex rounded-full px-3 py-1 text-xs font-medium leading-3 text-white"
+                                    :style="
+                                        'background: ' +
+                                        props.post.data.category.color
+                                    "
+                                >
+                                    {{ props.post.data.category.name }}
+                                </Link>
+                            </div>
                         </div>
                         <!-- options -->
                     </div>
@@ -43,7 +65,7 @@
     </div>
 </template>
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { parseHtml } from '@/Utils/html';
 import ContentItemAuthor from '@/Components/Content/Post/ContentItemAuthor.vue';
 import ContentVoting from '@/Components/Content/Post/ContentVoting.vue';

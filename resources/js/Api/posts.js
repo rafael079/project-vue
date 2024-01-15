@@ -1,5 +1,5 @@
 export default {
-    index() {
-        return axios.get(route('v1.posts.list'));
+    index(category = null) {
+        return axios.get(route('v1.posts.list', { category: category }));
     }
 };

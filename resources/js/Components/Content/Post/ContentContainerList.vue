@@ -5,6 +5,7 @@
             <ContentItemSkeleton v-for="n in 6" :key="n" />
         </template>
         <!-- skeleton -->
+
         <template v-else>
             <div
                 v-for="post in posts"
@@ -13,15 +14,26 @@
             >
                 <ContentListItem :post="post" />
             </div>
+
+            <ContentNotFound v-if="posts.length === 0" />
         </template>
     </div>
 </template>
 <script setup>
 import { onMounted, ref } from 'vue';
 
-import ApiPosts from '@/Api/posts';
 import ContentListItem from '@Components/Content/Post/ContentListItem.vue';
 import ContentItemSkeleton from '@Components/Content/Post/ContentItemSkeleton.vue';
+import ContentNotFound from '@Components/Content/Post/ContentNotFound.vue';
+
+import ApiPosts from '@/Api/posts';
+
+const props = defineProps({
+    category: {
+        type: String,
+        default: null
+    }
+});
 
 const isLoadingPosts = ref(false);
 
@@ -30,7 +42,7 @@ const posts = ref([]);
 const getPosts = async () => {
     isLoadingPosts.value = true;
 
-    await ApiPosts.index().then(function (response) {
+    await ApiPosts.index(props.category).then(function (response) {
         posts.value = response.data.data;
         isLoadingPosts.value = false;
     });

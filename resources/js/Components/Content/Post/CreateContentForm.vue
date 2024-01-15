@@ -54,7 +54,15 @@
                     :placeholder="__('Place your content (optional)')"
                 />
             </div>
+
             <div>
+                <span
+                    class="mb-1 inline-block rounded bg-neutral-100 px-2 py-1 text-sm lowercase text-neutral-400"
+                    >{{ __('Category') }} ({{ __('Optional') }})</span
+                >
+                <CategoryComboSelector @selected="selectCategory" />
+            </div>
+            <div class="border-t border-neutral-100 mt-4 pt-5">
                 <PrimaryButton
                     :loading="form.processing"
                     type="submit"
@@ -80,11 +88,17 @@ import PrimaryButton from '@/Components/Form/PrimaryButton.vue';
 import AppButton from '@/Components/Form/AppButton.vue';
 import LoaderCard from '@/Components/Shared/LoaderCard.vue';
 import AppTipTapEditor from '@/Components/Form/AppTipTapEditor.vue';
+import CategoryComboSelector from '@Components/Content/Category/CategoryComboSelector.vue';
 
 const form = useForm({
     title: '',
-    content: ''
+    content: '',
+    category: ''
 });
+
+const selectCategory = (data) => {
+    form.category = data;
+};
 
 const create = () => {
     form.post(route('posts.store'), {

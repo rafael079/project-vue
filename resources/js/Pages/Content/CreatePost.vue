@@ -6,10 +6,10 @@
         <div class="mx-auto mt-5 max-w-6xl">
             <div class="grid grid-cols-3 gap-4">
                 <div class="col-span-2 grid gap-y-2">
-                    <div
-                        class="relative overflow-hidden rounded bg-white shadow"
-                    >
-                        <div class="rounded-t border-b border-neutral-100 px-8 py-3">
+                    <div class="relative rounded bg-white shadow">
+                        <div
+                            class="rounded-t border-b border-neutral-100 px-8 py-3"
+                        >
                             <h2
                                 class="block items-center text-xl font-bold uppercase tracking-tight text-neutral-500"
                             >

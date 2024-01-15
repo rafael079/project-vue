@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
     <div>
-        <div class="px-5 pt-2">
+        <div class="flex gap-x-3 px-5 pt-2">
             <!-- author -->
             <ContentItemAuthor :post="props.post" />
             <!-- author -->
@@ -49,7 +49,7 @@
                             })
                         "
                         :title="props.post.title"
-                        class="mt-1 block w-full py-1 text-center text-sm backdrop-blur-sm"
+                        class="mt-5 block w-full py-1 text-center text-sm backdrop-blur-sm"
                     >
                         <span
                             class="rounded-full bg-white px-6 py-1 font-medium capitalize text-neutral-600 shadow group-hover:bg-primary-100 group-hover:text-primary-700"
@@ -63,6 +63,21 @@
         <!-- options -->
         <div class="flex gap-x-1 px-5 pb-3">
             <ContentVoting :post="props.post" />
+
+            <div v-if="props.post.category" class="flex items-center">
+                <Link
+                    :href="
+                        route('category.show', {
+                            category: props.post.category.id,
+                            slug: props.post.category.slug
+                        })
+                    "
+                    class="inline-flex rounded-full px-3 py-1 text-xs font-medium leading-3 text-white"
+                    :style="'background: ' + props.post.category.color"
+                >
+                    {{ props.post.category.name }}
+                </Link>
+            </div>
         </div>
         <!-- options -->
     </div>

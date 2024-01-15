@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class VoteController extends Controller
 {
-    public function store(VoteStoreRequest $voteStoreRequest, VoteRepository $voteRepository)
+    public function store(VoteStoreRequest $voteStoreRequest, VoteRepository $voteRepository): mixed
     {
         return $voteRepository->create($voteStoreRequest);
     }

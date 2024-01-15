@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class VoteRepository
 {
-    public function create(Request $request)
+    public function create(Request $request): mixed
     {
         $post = Post::findOrFail($request->post_id);
 
@@ -21,5 +21,7 @@ class VoteRepository
                 return new VoteResource($request->user()->downvote($post));
             }
         }
+
+        return null;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Services\Util\HashIdService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,7 +15,8 @@ class PostResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => (new HashIdService())->encode($this->id),
+            'id' => $this->id,
+            'category' => $this->category ? $this->category->only(['id', 'name', 'slug', 'color']) : null,
             'title' => $this->title,
             'slug' => $this->slug,
             'excerpt' => $this->excerpt,
