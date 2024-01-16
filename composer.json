@@ -2,8 +2,20 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "D:\\Desenvolvimento\\www\\readability.php",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require": {
         "php": "^8.1",
         "based/momentum-preflight": "^0.2.0",
@@ -17,7 +29,8 @@
         "overtrue/laravel-vote": "^3.1",
         "stevebauman/purify": "^6.1",
         "tightenco/ziggy": "^1.8",
-        "vinkla/hashids": "^11.0"
+        "vinkla/hashids": "^11.0",
+        "rafael079/readability.php": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

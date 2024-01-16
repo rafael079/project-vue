@@ -7,6 +7,7 @@
             <div class="overflow-hidden rounded">
                 <AppTextArea
                     id="comment-input"
+                    :key="componentKey"
                     v-model="form.message"
                     required
                     :placeholder="props.placeholder"
@@ -27,11 +28,14 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
 import LoaderCard from '@Components/Shared/LoaderCard.vue';
 import AppTextArea from '@Components/Form/AppTextArea.vue';
 import AppButton from '@Components/Form/AppButton.vue';
+
+const componentKey = ref(0);
 
 const props = defineProps({
     placeholder: {
@@ -58,12 +62,15 @@ const form = useForm({
     parent_comment_id: props.parentCommentId
 });
 
+const forceRenderComponent = () => (componentKey.value += 1);
+
 const emit = defineEmits(['refreshComments']);
 
 const create = () => {
     form.post(route('posts.comments.store'), {
         onSuccess: () => {
             form.reset();
+            forceRenderComponent();
             emit('refreshComments');
         }
     });

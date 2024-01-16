@@ -30,6 +30,21 @@
                             <!-- text -->
                         </article>
 
+                        <div
+                            v-if="props.post.data.source"
+                            class="my-4 bg-neutral-100 px-8 py-4 text-sm"
+                        >
+                            {{ __('See full article at') }}:
+                            <a
+                                :href="props.post.data.source"
+                                target="_blank"
+                                rel="nofollow noopener noreferrer"
+                                referrerpolicy="no-referrer"
+                                class="font-medium text-blue-600 hover:underline"
+                                >{{ truncate(props.post.data.source, 50) }}</a
+                            >
+                        </div>
+
                         <!-- options -->
                         <ContentOptionsItem :post="props.post.data" />
                         <!-- options -->
@@ -45,6 +60,8 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import { parseHtml } from '@/Utils/html';
+import { truncate } from '@/Utils/text';
+
 import ContentItemAuthor from '@/Components/Content/Post/ContentItemAuthor.vue';
 import ContentOptionsItem from '@/Components/Content/Post/ContentOptionsItem.vue';
 import CommentContainer from '@/Components/Content/Comment/CommentsContainer.vue';

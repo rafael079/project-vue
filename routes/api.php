@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Content\CategoryController;
 use App\Http\Controllers\Api\Content\CommentController;
+use App\Http\Controllers\Api\Content\ExternalContentController;
 use App\Http\Controllers\Api\Content\PostController;
 use App\Http\Controllers\Api\Content\VoteController;
 use App\Http\Controllers\Api\User\UserController;
@@ -39,6 +40,11 @@ Route::name('v1.')->prefix('v1')->group(function () {
         });
 
     });
+
+    # Get External Content
+    Route::name('content.')->prefix('content')->group(function () {
+        Route::post('url', [ExternalContentController::class, 'getByUrl'])->name('url');
+    })->middleware(['auth:sanctum']);
 
     # Categories
     Route::name('categories.')->group(function () {

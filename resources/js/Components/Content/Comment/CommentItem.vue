@@ -26,8 +26,12 @@
                     class="flex flex-1 items-center px-4 font-bold lowercase leading-tight"
                 >
                     <Link
-                        :href="'#'"
-                        class="text-blue-500 hover:text-blue-700 hover:underline"
+                        :href="
+                            route('users.profile.show', {
+                                username: comment.author.username
+                            })
+                        "
+                        class="text-secundary-500 hover:text-primary-700 hover:underline"
                     >
                         {{ comment.author.username }}
                     </Link>
@@ -36,7 +40,7 @@
                     </span>
                 </div>
                 <div
-                    class="ml-2 flex-1 px-2 text-sm font-medium leading-loose text-gray-600"
+                    class="ml-2 flex-1 px-2 text-sm font-medium leading-tight text-gray-600"
                 >
                     {{ comment.message }}
                 </div>

@@ -10,13 +10,20 @@
             {{ props.label }}:
         </InputLabel>
 
-        <div class="group relative w-full rounded border border-neutral-300/70 bg-neutral-100 focus-within:border-gray-400 focus-within:bg-neutral-50 focus-within:shadow-sm focus-within:shadow-gray-300">
+        <div
+            :class="{
+                '!border-red-300 !bg-red-100/70 text-red-600': props.error
+            }"
+            class="group relative w-full rounded border border-neutral-300/70 bg-neutral-100 focus-within:border-gray-400 focus-within:bg-neutral-50 focus-within:shadow-sm focus-within:shadow-gray-300"
+        >
             <textarea
                 v-bind="$attrs"
                 ref="textareaRef"
                 :value="props.modelValue"
-                class="w-full border-none resize-none bg-transparent px-4 py-3.5 text-sm placeholder:text-neutral-400/80 focus:ring-0"
-                @input="$emit('update:modelValue', $event.target.value)"
+                class="w-full resize-none border-none bg-transparent px-4 py-3.5 text-sm placeholder:text-neutral-400/80 focus:ring-0"
+                @input="
+                    $emit('update:modelValue', $event.target.value), resize()
+                "
             />
         </div>
 
@@ -55,6 +62,11 @@ const props = defineProps({
 defineOptions({
     inheritAttrs: false
 });
+
+const resize = () => {
+    textareaRef.value.style.height = 'auto';
+    textareaRef.value.style.height = textareaRef.value.scrollHeight + 'px';
+};
 
 defineEmits(['update:modelValue']);
 

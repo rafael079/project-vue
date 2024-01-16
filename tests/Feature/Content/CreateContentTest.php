@@ -39,4 +39,5 @@ class CreateContentTest extends TestCase
 
         $response->assertRedirect(route('home'));
     }
+    
 }

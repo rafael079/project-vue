@@ -3,18 +3,23 @@
         <template v-if="isLoadingComments">
             <CommentsSkeletonLoader v-for="n in 4" :key="n" class="mt-3" />
         </template>
-        <template v-else-if="comments">
-            <div
-                v-for="(comment, index) in comments"
-                :key="index"
-                class="relative flex w-full flex-col py-2 text-sm"
-            >
-                <CommentItem
-                    :comment="comment"
-                    :post-id="props.postId"
-                    @refresh-comments="getComments()"
-                />
-            </div>
+        <template v-else>
+            <template v-if="comments && comments.length > 0">
+                <div
+                    v-for="(comment, index) in comments"
+                    :key="index"
+                    class="relative flex w-full flex-col py-2 text-sm"
+                >
+                    <CommentItem
+                        :comment="comment"
+                        :post-id="props.postId"
+                        @refresh-comments="getComments()"
+                    />
+                </div>
+            </template>
+            <template v-else>
+                <CommentNotFound />
+            </template>
         </template>
     </div>
 </template>
@@ -23,6 +28,7 @@ import { onMounted, ref } from 'vue';
 
 import CommentsSkeletonLoader from '@Components/Content/Comment/CommentsSkeletonLoader.vue';
 import CommentItem from '@Components/Content/Comment/CommentItem.vue';
+import CommentNotFound from '@Components/Content/Comment/CommentNotFound.vue';
 
 import ApiComments from '@/Api/comments';
 

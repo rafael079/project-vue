@@ -22,6 +22,8 @@ class PostResource extends JsonResource
             'slug' => $this->slug,
             'excerpt' => $this->excerpt,
             'content' => $this->content,
+            'source' => $this->source,
+            'is_imported' => $this->imported,
             'author' => $this->user->only(['first_name', 'last_name', 'avatar', 'username']),
             'total_comments' => $this->comments_count,
             'total_votes' => $this->total_votes,
