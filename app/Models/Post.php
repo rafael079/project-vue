@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Overtrue\LaravelVote\Traits\Votable;
 use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
@@ -36,7 +37,6 @@ class Post extends Model
      * @var array
      */
     protected $casts = [
-        'id' => HashId::class,
         'content' => PurifyHtmlOnGet::class,
     ];
 
@@ -59,5 +59,13 @@ class Post extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Comments
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

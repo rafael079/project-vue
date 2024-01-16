@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Content\CategoryController;
+use App\Http\Controllers\Content\CommentController;
 use App\Http\Controllers\Content\PostController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\ImageController;
@@ -53,6 +54,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::name('posts.')->prefix('p')->group(function () {
         Route::get('create', [PostController::class, 'create'])->name('create');
         Route::post('store', [PostController::class, 'store'])->name('store');
+
+        # Comments
+        Route::name('comments.')->prefix('comments')->group(function () {
+            Route::post('store', [CommentController::class, 'store'])->name('store');
+        });
     });
 });
 

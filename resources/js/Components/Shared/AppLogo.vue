@@ -2,7 +2,7 @@
     <div
         class="group relative flex h-12 items-center gap-x-1 overflow-hidden font-bold lowercase"
     >
-        <span class="absolute left-0 top-0 text-orange-600/15">
+        <span class="absolute left-0 top-0 text-red-600/10">
             <McEarthFill class="h-12 w-12 fill-white" />
         </span>
         <span

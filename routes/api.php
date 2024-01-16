@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Content\CategoryController;
+use App\Http\Controllers\Api\Content\CommentController;
 use App\Http\Controllers\Api\Content\PostController;
 use App\Http\Controllers\Api\Content\VoteController;
 use App\Http\Controllers\Api\User\UserController;
@@ -43,6 +44,11 @@ Route::name('v1.')->prefix('v1')->group(function () {
     Route::name('categories.')->group(function () {
         # List Categories
         Route::get('categories', [CategoryController::class, 'index'])->name('list');
+    });
+
+    # Comments
+    Route::name('comments.')->prefix('comments')->group(function () {
+        Route::get('{post_id}', [CommentController::class, 'getByPostId'])->name('getByPostId');
     });
 
     # Users

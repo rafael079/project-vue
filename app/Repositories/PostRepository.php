@@ -35,7 +35,7 @@ class PostRepository implements PostRepositoryInterface
     {
         $id = (new HashIdService)->decode($id);
 
-        $post = Post::where(['id' => $id])->first();
+        $post = Post::withCount('comments')->where(['id' => $id])->first();
 
         if (Auth::check()) {
             $post = Auth::user()->attachVoteStatus($post);
@@ -47,7 +47,7 @@ class PostRepository implements PostRepositoryInterface
 
     public function getAllPostsPublished(array $params = null): Collection
     {
-        $posts = Post::latest()->published();
+        $posts = Post::withCount('comments')->latest()->published();
 
         if (isset($params['category'])) {
             $posts = $posts->where('category_id', $params['category']);

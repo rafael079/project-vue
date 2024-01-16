@@ -31,33 +31,11 @@
                         </article>
 
                         <!-- options -->
-                        <div class="flex gap-x-1 px-7 pb-3">
-                            <ContentVoting :post="props.post.data" />
-
-                            <div
-                                v-if="props.post.data.category"
-                                class="flex items-center"
-                            >
-                                <Link
-                                    :href="
-                                        route('category.show', {
-                                            category:
-                                                props.post.data.category.id,
-                                            slug: props.post.data.category.slug
-                                        })
-                                    "
-                                    class="inline-flex rounded-full px-3 py-1 text-xs font-medium leading-3 text-white"
-                                    :style="
-                                        'background: ' +
-                                        props.post.data.category.color
-                                    "
-                                >
-                                    {{ props.post.data.category.name }}
-                                </Link>
-                            </div>
-                        </div>
+                        <ContentOptionsItem :post="props.post.data" />
                         <!-- options -->
                     </div>
+
+                    <CommentContainer :post-id="props.post.data.id" />
                 </div>
                 <div class="rounded bg-gray-300"></div>
             </div>
@@ -68,7 +46,8 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { parseHtml } from '@/Utils/html';
 import ContentItemAuthor from '@/Components/Content/Post/ContentItemAuthor.vue';
-import ContentVoting from '@/Components/Content/Post/ContentVoting.vue';
+import ContentOptionsItem from '@/Components/Content/Post/ContentOptionsItem.vue';
+import CommentContainer from '@/Components/Content/Comment/CommentsContainer.vue';
 
 const props = defineProps({
     post: {
