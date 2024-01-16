@@ -17,7 +17,7 @@ class PostResource extends JsonResource
     {
         return [
             'id' => (new HashIdService())->encode(($this->id)),
-            'category' => $this->category ? $this->category->only(['id', 'name', 'slug', 'color']) : null,
+            'category' => $this->category ? new CategoryResource($this->category) : null,
             'title' => $this->title,
             'slug' => $this->slug,
             'excerpt' => $this->excerpt,

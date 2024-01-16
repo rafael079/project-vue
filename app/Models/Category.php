@@ -31,15 +31,6 @@ class Category extends Model
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => HashId::class
-    ];
-
-    /**
      * Scope a query to only root categories.
      */
     public function scopeRoot(Builder $query): void
