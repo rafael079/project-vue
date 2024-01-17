@@ -47,10 +47,10 @@
                         <Tab v-slot="{ selected }" as="div">
                             <AppButton
                                 :class="{
-                                    'bg-primary-500 text-white hover:bg-primary-700':
+                                    'bg-primary-500 font-medium text-white hover:bg-primary-700':
                                         selected
                                 }"
-                                class="group flex items-center rounded bg-neutral-100 px-3 py-1.5 text-sm font-medium text-neutral-500 shadow transition duration-150 focus-within:ring-0"
+                                class="group flex items-center rounded bg-neutral-100 px-3 py-1.5 text-sm text-neutral-500 shadow transition duration-150 focus-within:ring-0"
                             >
                                 <McLayout5Fill class="me-1.5 h-4 w-4" />{{
                                     __('Content Text')
@@ -61,10 +61,10 @@
                         <Tab v-slot="{ selected }" as="div">
                             <AppButton
                                 :class="{
-                                    'bg-primary-500 text-white hover:bg-primary-700':
+                                    'bg-primary-500 font-medium text-white hover:bg-primary-700':
                                         selected
                                 }"
-                                class="group flex items-center rounded bg-neutral-100 px-3 py-1.5 text-sm text-neutral-400 shadow transition duration-150 focus-within:ring-0"
+                                class="group flex items-center rounded bg-neutral-100 px-3 py-1.5 text-sm text-neutral-500 shadow transition duration-150 focus-within:ring-0"
                             >
                                 <McLink3Fill class="me-1.5 h-4 w-4" />{{
                                     __('Content By Link')
@@ -74,10 +74,10 @@
                         <Tab v-slot="{ selected }" as="div">
                             <AppButton
                                 :class="{
-                                    'bg-primary-500 text-white hover:bg-primary-700':
+                                    'bg-primary-500 font-medium text-white hover:bg-primary-700':
                                         selected
                                 }"
-                                class="group flex items-center rounded bg-neutral-100 px-3 py-1.5 text-sm text-neutral-400 shadow transition duration-150 focus-within:ring-0"
+                                class="group flex items-center rounded bg-neutral-100 px-3 py-1.5 text-sm text-neutral-500 shadow transition duration-150 focus-within:ring-0"
                             >
                                 <McPhotoAlbum2Fill class="me-1.5 h-4 w-4" />{{
                                     __('Add Photo & Video')
@@ -86,7 +86,7 @@
                         </Tab>
                     </TabList>
                     <TabPanels class="flex w-full">
-                        <TabPanel class="w-full">
+                        <TabPanel class="w-full pt-2">
                             <div>
                                 <AppTipTapEditor
                                     v-model="form.content"
@@ -96,7 +96,7 @@
                                 />
                             </div>
                         </TabPanel>
-                        <TabPanel as="div" class="flex w-full flex-col">
+                        <TabPanel as="div" class="flex w-full flex-col pt-2">
                             <AppTextArea
                                 v-model="form.url"
                                 :error="form.errors.url"
@@ -104,7 +104,9 @@
                                 @change="getContentByUrl"
                             />
                         </TabPanel>
-                        <TabPanel>Content photos and videos</TabPanel>
+                        <TabPanel as="div" class="flex w-full flex-col pt-2">
+                            <DropzoneUploadFile @upload="onUploads" />
+                        </TabPanel>
                     </TabPanels>
                 </TabGroup>
             </div>
@@ -117,7 +119,7 @@
                     class="relative w-full max-w-[40%] flex-shrink-0 overflow-hidden rounded-bl rounded-tl"
                 >
                     <AppImage
-                        :src="form.links[0]"
+                        :src="form.urlImages[0]"
                         :alt="form.title"
                         class="absolute left-0 top-0 h-40 w-full object-cover"
                     />
@@ -138,7 +140,7 @@
                 </div>
             </div>
 
-            <div class="mt-4 border-t border-neutral-100 pt-5">
+            <div class="border-t border-neutral-100 pt-5">
                 <PrimaryButton
                     :loading="form.processing"
                     type="submit"
@@ -163,18 +165,19 @@ import { router, useForm } from '@inertiajs/vue3';
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 import { trans } from 'laravel-vue-i18n';
 import { urlValidation } from '@/Utils/url';
+import { truncate } from '@/Utils/text';
 
 import ApiUrl from '@/Api/url';
 
 import InputText from '@/Components/Form/InputText.vue';
 import PrimaryButton from '@/Components/Form/PrimaryButton.vue';
 import AppButton from '@/Components/Form/AppButton.vue';
+import DropzoneUploadFile from '@/Components/Form/DropzoneUploadFile.vue';
 import LoaderCard from '@/Components/Shared/LoaderCard.vue';
 import AppTipTapEditor from '@/Components/Form/AppTipTapEditor.vue';
 import CategoryComboSelector from '@Components/Content/Category/CategoryComboSelector.vue';
 import AppTextArea from '@/Components/Form/AppTextArea.vue';
 import AppImage from '@/Components/Shared/AppImage.vue';
-import { truncate } from '@/Utils/text';
 
 const selectedTab = ref(0);
 
@@ -186,8 +189,9 @@ const form = useForm({
     title: '',
     content: '',
     category: '',
+    images: [],
     url: '',
-    links: ''
+    urlImages: ''
 });
 
 const changeTabOptions = (data) => {
@@ -211,16 +215,21 @@ const getContentByUrl = async (event) => {
         return;
     }
 
-    const { title, excerpt, images } = await ApiUrl.getContentByUrl(
-        source
-    ).then((response) => {
-        loadingUrlContent.value = false;
-        return response.data.data;
-    });
+    const { title, excerpt, images } = await ApiUrl.getContentByUrl(source)
+        .then((response) => {
+            loadingUrlContent.value = false;
+            return response.data.data;
+        })
+        .catch(function (error) {
+            loadingUrlContent.value = false;
+            form.errors.url = trans(
+                'An error occurred while trying to retrieve data from this URL, Try again'
+            );
+        });
 
     form.title = title;
     form.content = excerpt;
-    form.links = images;
+    form.urlImages = images;
 
     isUrlContent.value = true;
 };
@@ -235,5 +244,17 @@ const create = () => {
 
 const close = () => {
     router.visit(route('home'), { preserveScroll: true });
+};
+
+const onUploads = (files) => {
+    let fileSource;
+
+    fileSource = files.map(function (file) {
+        if (file.type === 'image') {
+            return file.source;
+        }
+    });
+
+    form.images = fileSource;
 };
 </script>

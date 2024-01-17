@@ -21,6 +21,21 @@
                                 {{ props.post.data.title }}
                             </h2>
 
+                            <!-- media -->
+                            <ContentDisplayMedia
+                                v-if="
+                                    props.post.data.media &&
+                                    props.post.data.media.length > 0
+                                "
+                                height="32rem"
+                                :media="props.post.data.media"
+                                :post="{
+                                    id: props.post.data.id,
+                                    slug: props.post.data.slug
+                                }"
+                            />
+                            <!-- media -->
+
                             <!-- text -->
                             <article
                                 v-if="props.post.data.content"
@@ -65,6 +80,7 @@ import { truncate } from '@/Utils/text';
 import ContentItemAuthor from '@/Components/Content/Post/ContentItemAuthor.vue';
 import ContentOptionsItem from '@/Components/Content/Post/ContentOptionsItem.vue';
 import CommentContainer from '@/Components/Content/Comment/CommentsContainer.vue';
+import ContentDisplayMedia from '@/Components/Content/Post/ContentDisplayMedia.vue';
 
 const props = defineProps({
     post: {

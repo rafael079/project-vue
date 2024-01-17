@@ -27,10 +27,11 @@
         "league/glide": "^2.3",
         "league/glide-laravel": "^1.0",
         "overtrue/laravel-vote": "^3.1",
+        "rafael079/readability.php": "@dev",
+        "spatie/laravel-medialibrary": "^11.0.0",
         "stevebauman/purify": "^6.1",
         "tightenco/ziggy": "^1.8",
-        "vinkla/hashids": "^11.0",
-        "rafael079/readability.php": "@dev"
+        "vinkla/hashids": "^11.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

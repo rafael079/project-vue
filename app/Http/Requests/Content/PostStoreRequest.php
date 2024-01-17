@@ -5,6 +5,8 @@ namespace App\Http\Requests\Content;
 use App\Services\Util\HashIdService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class PostStoreRequest extends FormRequest
 {
@@ -36,7 +38,21 @@ class PostStoreRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:300'],
             'content' => ['nullable', 'string'],
-            'category' => ['nullable', 'exists:App\Models\Category,id']
+            'category' => ['nullable', 'exists:App\Models\Category,id'],
+            'url' => ['nullable', 'url', 'string'],
+            'urlImages.*' => ['nullable', 'url', 'string'],
+            'images.*' => [
+                'nullable',
+                'image',
+                'mimes:' . config('uploads.images.mime_types'),
+                File::image()
+                    ->max(config('uploads.images.maximum_size'))
+                    ->dimensions(
+                        Rule::dimensions()
+                            ->maxWidth(config('uploads.images.max_width_dimensions'))
+                            ->maxHeight(config('uploads.images.max_height_dimensions'))
+                    )
+            ],
         ];
     }
 }

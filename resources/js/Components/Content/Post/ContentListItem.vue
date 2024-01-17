@@ -24,6 +24,17 @@
             <!-- title -->
         </Link>
 
+        <!-- media -->
+        <ContentDisplayMedia
+            v-if="props.post.media && props.post.media.length > 0"
+            :media="props.post.media"
+            :post="{
+                id: props.post.id,
+                slug: props.post.slug
+            }"
+        />
+        <!-- media -->
+
         <Link
             class="group"
             :href="
@@ -73,6 +84,7 @@ import { parseHtml } from '@/Utils/html';
 
 import ContentItemAuthor from '@Components/Content/Post/ContentItemAuthor.vue';
 import ContentOptionsItem from '@Components/Content/Post/ContentOptionsItem.vue';
+import ContentDisplayMedia from '@Components/Content/Post/ContentDisplayMedia.vue';
 
 const props = defineProps({
     post: {

@@ -23,6 +23,7 @@ class PostResource extends JsonResource
             'excerpt' => $this->excerpt,
             'content' => $this->content,
             'source' => $this->source,
+            'media' => MediaResource::collection($this->getMedia('content')),
             'is_imported' => $this->imported,
             'author' => $this->user->only(['first_name', 'last_name', 'avatar', 'username']),
             'total_comments' => $this->comments_count,

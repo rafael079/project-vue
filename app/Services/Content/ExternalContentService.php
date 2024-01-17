@@ -19,14 +19,15 @@ class ExternalContentService
     {
         $headers = [
             'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language' => 'en-US,en,pt-BR,pt;q=0.5',
-            'Referer' => ''
+            'Accept-Language' => 'en-US,en,pt-BR,pt;q=0.8',
+            'Accept-Encoding' => 'gzip, deflate, sdch',
+            'Upgrade-Insecure-Requests' => 1,
+            'Referer' => '',
+            'Connection' => 'keep-alive'
         ];
 
         $options = [
-            'useragent' => 'Mozilla/5.0 (Windows NT 6.3; WOW64) ' .
-                'AppleWebKit/537.36 (KHTML, like Gecko) ' .
-                'Chrome/60.0.2214.115 Safari/537.36',
+            'useragent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
             'verify' => false,
         ];
 

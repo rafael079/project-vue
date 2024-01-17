@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Content\PostStoreRequest;
 use App\Http\Resources\PostResource;
 use App\Repositories\PostRepository;
+use App\Services\Content\UploadFilesContent;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,18 +18,26 @@ class PostController extends Controller
         return Inertia::render('Content/CreatePost');
     }
 
-    public function show(string $id, PostRepository $postRepository)
+    public function show(string $id, PostRepository $repository)
     {
-        $post = $postRepository->getById($id);
+        $post = $repository->getById($id);
 
         return Inertia::render('Content/ShowPost', [
             'post' => new PostResource($post)
         ]);
     }
 
-    public function store(PostStoreRequest $postStoreRequest, PostRepository $postRepository): RedirectResponse
+    public function store(PostStoreRequest $request, PostRepository $repository, UploadFilesContent $uploadService): RedirectResponse
     {
-        $postRepository->create($postStoreRequest);
+        $post = $repository->create($request);
+
+        if (!empty($request->urlImages)) {
+            $uploadService->uploadByUrl($request->urlImages, $post);
+        }
+
+        if ($post && ($request->images)) {
+            $uploadService->upload($request->images, $post);
+        }
 
         return redirect()
             ->route('home')

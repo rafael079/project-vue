@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Overtrue\LaravelVote\Traits\Votable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory, Votable;
+    use HasFactory, Votable, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
