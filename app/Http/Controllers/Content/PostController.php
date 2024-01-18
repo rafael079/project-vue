@@ -35,8 +35,8 @@ class PostController extends Controller
             $uploadService->uploadByUrl($request->urlImages, $post);
         }
 
-        if ($post && ($request->images)) {
-            $uploadService->upload($request->images, $post);
+        if ($post && ($request->images || $request->videos)) {
+            $uploadService->upload(($request->images ?? $request->videos), $post);
         }
 
         return redirect()

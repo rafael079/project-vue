@@ -27,7 +27,7 @@
                                     props.post.data.media &&
                                     props.post.data.media.length > 0
                                 "
-                                height="32rem"
+                                height="34rem"
                                 :media="props.post.data.media"
                                 :post="{
                                     id: props.post.data.id,

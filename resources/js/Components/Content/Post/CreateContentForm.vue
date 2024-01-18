@@ -189,7 +189,8 @@ const form = useForm({
     title: '',
     content: '',
     category: '',
-    images: [],
+    images: null,
+    videos: null,
     url: '',
     urlImages: ''
 });
@@ -247,14 +248,24 @@ const close = () => {
 };
 
 const onUploads = (files) => {
-    let fileSource;
+    let fileSourceImages;
+    let fileSourceVideo;
 
-    fileSource = files.map(function (file) {
+    fileSourceImages = files.map(function (file) {
         if (file.type === 'image') {
             return file.source;
         }
+        return;
     });
 
-    form.images = fileSource;
+    fileSourceVideo = files.map(function (file) {
+        if (file.type === 'video') {
+            return file.source;
+        }
+        return null;
+    });
+
+    form.images = fileSourceImages[0] !== undefined ? fileSourceImages : null;
+    form.videos = fileSourceVideo[0] !== undefined ? fileSourceVideo : null;
 };
 </script>

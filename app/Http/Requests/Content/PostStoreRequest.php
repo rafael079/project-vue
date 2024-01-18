@@ -53,6 +53,12 @@ class PostStoreRequest extends FormRequest
                             ->maxHeight(config('uploads.images.max_height_dimensions'))
                     )
             ],
+            'videos.*' => [
+                'nullable',
+                'mimes:' . config('uploads.videos.mime_types'),
+                File::default()
+                    ->max(config('uploads.videos.maximum_size'))
+            ]
         ];
     }
 }

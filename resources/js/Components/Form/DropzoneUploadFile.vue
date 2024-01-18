@@ -44,20 +44,27 @@
         >
             <div
                 v-for="(file, index) in files"
-                :key="index"
-                class="relative inline-flex h-[8rem]"
+                :key="file.id"
+                class="relative flex h-full w-full"
             >
                 <template v-if="file.type === 'image'">
-                    <AppImage
-                        :src="file.url"
-                        class="w-auto rounded border border-transparent object-cover shadow hover:border-primary-500"
-                    />
-                    <AppButton
-                        class="absolute right-2.5 top-2.5 rounded-full bg-black bg-opacity-85 p-1 text-white"
-                        @click="remove(index)"
-                    >
-                        <McDelete2Fill class="h-5 w-5" />
-                    </AppButton>
+                    <div class="inline-flex h-[8rem]">
+                        <AppImage
+                            :src="file.url"
+                            class="w-auto rounded border border-transparent object-cover shadow hover:border-primary-500"
+                        />
+                        <AppButton
+                            class="absolute right-2.5 top-2.5 rounded-full bg-black bg-opacity-85 p-1 text-white"
+                            @click="remove(index)"
+                        >
+                            <McDelete2Fill class="h-5 w-5" />
+                        </AppButton>
+                    </div>
+                </template>
+                <template v-else-if="file.type === 'video'">
+                    <div class="inline-flex h-[30rem] w-full overflow-hidden">
+                        <DefaultVideoPlayer :src="file.url" />
+                    </div>
                 </template>
             </div>
         </div>
@@ -66,8 +73,10 @@
 </template>
 <script setup>
 import { ref } from 'vue';
+
 import AppImage from '@Components/Shared/AppImage.vue';
 import AppButton from '@Components/Form/AppButton.vue';
+import DefaultVideoPlayer from '@Components/Shared/DefaultVideoPlayer.vue';
 
 const inputFile = ref(null);
 
@@ -106,6 +115,16 @@ const uploadMedia = (event) => {
             if (type === 'image') {
                 files.value.push({
                     id: index,
+                    type: type,
+                    url: URL.createObjectURL(input.files[index]),
+                    source: input.files[index]
+                });
+            } else if (type === 'video') {
+                files.value = [];
+
+                console.log(files.value);
+                files.value.push({
+                    id: new Date().getTime(),
                     type: type,
                     url: URL.createObjectURL(input.files[index]),
                     source: input.files[index]
