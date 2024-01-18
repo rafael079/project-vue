@@ -8,18 +8,25 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function store(AuthenticatedSessionStoreRequest $authenticatedSessionStoreRequest): RedirectResponse
-    {
-        $authenticatedSessionStoreRequest->authenticate();
 
-        $authenticatedSessionStoreRequest->session()->regenerate();
+    public function index()
+    {
+        return Inertia::render('Auth/LoginPage');
+    }
+
+    public function store(AuthenticatedSessionStoreRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
 
         return redirect()->route(
-            $authenticatedSessionStoreRequest->redirect['route'] ?? RouteServiceProvider::HOME,
-            $authenticatedSessionStoreRequest->redirect['params'] ?? null
+            $request->redirect['route'] ?? 'home',
+            $request->redirect['params'] ?? null
         );
     }
 

@@ -26,8 +26,13 @@ use Momentum\Preflight\PreflightMiddleware;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['guest'])->group(function () {
-    Route::post('register', [RegisterController::class, 'store'])->middleware(PreflightMiddleware::class)->name('register');
+
+    Route::get('register', [RegisterController::class, 'create'])->name('register');
+    Route::post('register', [RegisterController::class, 'store'])->name('register');
+
+    Route::get('login', [AuthenticatedSessionController::class, 'index'])->name('login');
     Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login');
+
 });
 
 # Auth
