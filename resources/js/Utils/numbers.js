@@ -2,7 +2,7 @@ const abbreviateNumber = (value) => {
     let newValue = value;
 
     if (value >= 1000) {
-        let suffixes = ['', 'k', 'm', 'b', 't'];
+        let suffixes = ['', 'K', 'M', 'B', 'T'];
         let suffixNum = Math.floor(('' + value).length / 3);
         let shortValue = '';
 

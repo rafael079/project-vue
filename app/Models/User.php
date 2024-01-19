@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Overtrue\LaravelFollow\Traits\Followable;
+use Overtrue\LaravelFollow\Traits\Follower;
 use Overtrue\LaravelVote\Traits\Voter;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, Voter;
+    use HasApiTokens, HasFactory, Notifiable, Voter, Follower, Followable;
 
     /**
      * The attributes that are mass assignable.

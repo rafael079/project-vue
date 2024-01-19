@@ -1,10 +1,10 @@
 <template>
     <div>
         <AppButton
-            class="-mt-3.5 me-6 flex items-center gap-x-1.5 rounded-full border border-neutral-200/50 bg-neutral-50 px-2 py-1.5 pe-4 text-sm font-medium text-neutral-600 shadow-sm hover:bg-neutral-200 hover:text-neutral-700"
+            class="flex items-center gap-x-1.5 rounded bg-neutral-700 px-2 py-1.5 font-medium text-white"
             @click="openUserEditModal = true"
         >
-            <FlFilledPersonEdit class="h-5 w-5 opacity-35" />
+            <FlFilledPersonEdit class="h-4 w-4 opacity-35" />
             {{ __('Edit You Data') }}
         </AppButton>
         <AppModal

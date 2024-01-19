@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-white rounded border-t-[5px] bg-opacity-[.80] w-full text-sm p-1 shadow-md"
+        class="bg-white rounded border-t-[5px] bg-opacity-[.95] w-full text-sm p-1 shadow-md"
         :class="{
             'border-green-700 bg-green-100': props.message.type === 'success',
             'border-red-700 bg-red-100': props.message.type === 'error',

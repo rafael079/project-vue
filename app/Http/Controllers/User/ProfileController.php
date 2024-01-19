@@ -13,8 +13,10 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
-    public function show(User $user): Response
+    public function show(string $username): Response
     {
+        $user = User::withCount(['followings', 'followables'])->where("username", $username)->first();
+
         return Inertia::render('User/ProfileShow', [
             'user' => new UserResource($user),
             'permissions' => [

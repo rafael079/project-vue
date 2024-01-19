@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Content\CommentController;
 use App\Http\Controllers\Api\Content\ExternalContentController;
 use App\Http\Controllers\Api\Content\PostController;
 use App\Http\Controllers\Api\Content\VoteController;
+use App\Http\Controllers\Api\User\FollowController;
 use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -62,5 +63,14 @@ Route::name('v1.')->prefix('v1')->group(function () {
         # Check Users
         Route::get('check-username/{username}', [UserController::class, 'checkIfUsernameExists'])->name('check-username');
         Route::get('check-email/{email}', [UserController::class, 'checkIfEmailExists'])->name('check-email');
+
+        # Auth
+        Route::middleware(['auth:sanctum'])->group(function () { 
+            # Votes
+            Route::name('follow.')->prefix('follow')->group(function () {
+                Route::post('store', [FollowController::class, 'store'])->name('store');
+            });
+        });
+
     });
 });

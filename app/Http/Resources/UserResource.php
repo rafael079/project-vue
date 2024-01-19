@@ -22,6 +22,9 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'cover' => $this->cover,
             'avatar' => $this->avatar,
+            'followings_count' => $this->followings()->count(),
+            'followers_count' => $this->followers()->count(),
+            "has_followed" => auth()->check() ? $this->isFollowedBy(auth()->user()) : null,
         ];
     }
 }

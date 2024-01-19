@@ -12,5 +12,10 @@ export default {
                 email: email
             })
         );
+    },
+    following(username) {
+        return axios.post(route('v1.users.follow.store'), {
+            username: username
+        });
     }
 };

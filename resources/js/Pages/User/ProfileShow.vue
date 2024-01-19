@@ -36,9 +36,31 @@
                                         {{ user.last_name }}
                                     </h3>
                                 </div>
-                                <p class="text-xs text-neutral-500">
-                                    <span>@</span>{{ user.username }}
+                                <p
+                                    class="flex text-xs font-medium text-neutral-500"
+                                >
+                                    <span> @{{ user.username }} </span>
                                 </p>
+                                <div
+                                    class="my-2 flex gap-x-1.5 divide-x text-xs text-neutral-500"
+                                >
+                                    <span class="inline-flex">{{
+                                        __(':followers followers', {
+                                            followers:
+                                                abbreviateNumber(
+                                                    user.followers_count
+                                                ) ?? 0
+                                        })
+                                    }}</span>
+                                    <span class="inline-flex ps-1.5">{{
+                                        __(':followings followings', {
+                                            followings:
+                                                abbreviateNumber(
+                                                    user.followings_count
+                                                ) ?? 0
+                                        })
+                                    }}</span>
+                                </div>
                             </div>
                             <div class="flex items-center">
                                 <UserEditProfile
@@ -46,6 +68,19 @@
                                         $page.props.auth.user &&
                                         $page.props.permissions.edit
                                     "
+                                />
+                            </div>
+                            <div class="ml-auto flex items-center px-5">
+                                <UserFollowButton
+                                    v-if="
+                                        $page.props.auth.user &&
+                                        $page.props.auth.user.username !=
+                                            user.username
+                                    "
+                                    :user="{
+                                        username: user.username,
+                                        hasFollowed: user.has_followed
+                                    }"
                                 />
                             </div>
                         </div>
@@ -60,9 +95,12 @@
 </template>
 <script setup>
 import { Head } from '@inertiajs/vue3';
+import { abbreviateNumber } from '@/Utils/numbers';
+
 import UserCover from '@Components/User/UserCover.vue';
 import UserAvatar from '@/Components/User/UserAvatar.vue';
 import UserEditProfile from '@/Components/User/UserEditProfile.vue';
+import UserFollowButton from '@/Components/User/UserFollowButton.vue';
 
 const props = defineProps({
     user: {

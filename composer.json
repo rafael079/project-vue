@@ -26,6 +26,7 @@
         "laravel/tinker": "^2.8",
         "league/glide": "^2.3",
         "league/glide-laravel": "^1.0",
+        "overtrue/laravel-follow": "^5.1",
         "overtrue/laravel-vote": "^3.1",
         "rafael079/readability.php": "@dev",
         "spatie/laravel-medialibrary": "^11.0.0",
